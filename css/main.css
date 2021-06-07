@@ -177,6 +177,12 @@ th{
     text-align: left;
 }
 
+/* ATTRACTIES */
+.attracties{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
 
 
 

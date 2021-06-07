@@ -18,17 +18,33 @@ require_once 'admin/backend/config.php';
 </head>
 
 <body>
-
+    <?php
+        require_once 'admin/backend/conn.php';
+        $query = "SELECT * FROM RIDES";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $rides = $statement->fetchAll(PDO::FETCH_ASSOC);
+    ?>
     <?php require_once 'header.php'; ?>
     <div class="container content">
         <aside>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia modi dolore magnam! Iste libero voluptatum autem, sapiente ullam earum nostrum sed magnam vel laboriosam quibusdam, officia, esse vitae dignissimos nulla?
         </aside>
         <main>
-            <!-- hier komen de attractiekaartjes -->
+            <div class="attracties">
+            <?php foreach($rides as $ride): ?>
+                <div class="attractie">
+                    <img src="img/attracties/<?php echo $ride['img_file']; ?>" alt="attractie">
+                    <div class="attractie-info">
+                        <p class="themeland"><?php echo $ride['themeland']; ?></p>
+                        <h2><?php echo $ride['title']; ?></h2>
+                        <p><?php echo $ride['description']; ?></p>
+                        <p class=min-length><span><?php echo $ride['min_length']; ?></span> minimale lengte</p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            </div>
         </main>
     </div>
-
 </body>
-
 </html>
